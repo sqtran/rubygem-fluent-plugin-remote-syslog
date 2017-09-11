@@ -68,5 +68,5 @@ popd
 %{gem_instdir}/test
 
 %changelog
-* Mon Sep 11 2017 stran <stran@redhat.com> - 1.1-1
+* Mon Sep 11 2017 stran <steveqtran@gmail.com> - 1.1-1
 - Initial package
