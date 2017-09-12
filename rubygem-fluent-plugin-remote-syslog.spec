@@ -11,7 +11,14 @@ Source0: https://rubygems.org/gems/%{gem_name}-%{version}.gem
 BuildRequires: ruby(release)
 BuildRequires: rubygems-devel
 BuildRequires: ruby
+Requires: fluentd
+Requires: fluent-mixin-config-placeholders
+Requires: syslog_protocol
 BuildArch: noarch
+
+%if 0%{?rhel} > 0
+Provides: rubygem(%{gem_name}) = %{version}
+%endif
 
 %description
 Output plugin for streaming logs out to a remote syslog.
@@ -50,6 +57,7 @@ cp -a .%{gem_dir}/* \
 %check
 pushd .%{gem_instdir}
 # Run the test suite.
+rake test
 popd
 
 %files
@@ -68,5 +76,5 @@ popd
 %{gem_instdir}/test
 
 %changelog
-* Mon Sep 11 2017 stran <steveqtran@gmail.com> - 1.1-1
+* Tue Sep 12 2017 stran <steveqtran@gmail.com> - 1.1-1
 - Initial package

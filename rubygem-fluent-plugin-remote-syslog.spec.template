@@ -25,9 +25,16 @@ BuildRequires: gcc
 <%= development_dependencies.reject do |d|
   ["rdoc", "rake", "bundler"].include? d.name
 end.virtualize.with_requires.comment_out.to_rpm -%>
+Requires: fluentd
+Requires: fluent-mixin-config-placeholders
+Requires: syslog_protocol
 <% if spec.extensions.empty? -%>
 BuildArch: noarch
 <% end -%>
+
+%if 0%{?rhel} > 0
+Provides: rubygem(%{gem_name}) = %{version}
+%endif
 
 %description
 <%= spec.description %>
@@ -88,6 +95,7 @@ pushd .%{gem_instdir}
 <% for t in tests -%>
 # <%= t.command %>
 <% end -%>
+rake test
 popd
 
 %files
