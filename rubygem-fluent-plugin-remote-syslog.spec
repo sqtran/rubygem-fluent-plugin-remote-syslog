@@ -11,7 +11,10 @@ Source0: https://rubygems.org/gems/%{gem_name}-%{version}.gem
 BuildRequires: ruby(release)
 BuildRequires: rubygems-devel
 BuildRequires: ruby
-Requires: fluentd
+BuildRequires: rubygem(bundler)
+BuildRequires: rubygem(rake)
+BuildRequires: rubygem(test-unit)
+#BuildRequires: rubygem(fluentd)
 Requires: fluent-mixin-config-placeholders
 Requires: syslog_protocol
 BuildArch: noarch
@@ -56,7 +59,7 @@ cp -a .%{gem_dir}/* \
 
 %check
 pushd .%{gem_instdir}
-# Run the test suite.
+# ruby -e 'Dir.glob "./test/**/*_test.rb", &method(:require)'
 rake test
 popd
 
