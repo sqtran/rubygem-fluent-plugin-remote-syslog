@@ -25,7 +25,10 @@ BuildRequires: gcc
 <%= development_dependencies.reject do |d|
   ["rdoc", "rake", "bundler"].include? d.name
 end.virtualize.with_requires.comment_out.to_rpm -%>
-Requires: fluentd
+BuildRequires: rubygem(bundler)
+BuildRequires: rubygem(rake)
+BuildRequires: rubygem(test-unit)
+#BuildRequires: rubygem(fluentd)
 Requires: fluent-mixin-config-placeholders
 Requires: syslog_protocol
 <% if spec.extensions.empty? -%>
